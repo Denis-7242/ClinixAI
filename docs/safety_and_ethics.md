@@ -13,9 +13,10 @@ input is reported and is not persisted or scored.
 
 Red flags in the current knowledge base cover chest pain with breathlessness,
 fever with stiff neck, confusion with fever, blood in stool or vomit, and
-severe breathing difficulty. The last is represented by a single
-shortness-of-breath symptom and is intentionally broad: assessment users
-should seek emergency care based on severity and rapid worsening.
+severe breathing difficulty. The severe-breathing rule requires breathlessness
+to be marked present with severity 8 or higher; breathlessness alone does not
+trigger that rule. The threshold is a prototype safety rule, not a validated
+clinical scale.
 
 ## Disclaimer
 

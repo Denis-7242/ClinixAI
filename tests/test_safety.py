@@ -21,7 +21,12 @@ def kb():
 def test_every_knowledge_base_red_flag_fires(kb):
     for rule in kb.red_flags:
         symptoms = [
-            {"symptom_id": symptom_id, "present": True, "severity": None, "duration_days": None}
+            {
+                "symptom_id": symptom_id,
+                "present": True,
+                "severity": 9 if rule.minimum_severity else None,
+                "duration_days": None,
+            }
             for symptom_id in rule.required_symptom_ids
         ]
         result = check_red_flags(symptoms, kb)
@@ -58,6 +63,15 @@ def test_near_miss_warning(kb):
         kb,
     )
     assert any("Near-miss" in warning for warning in result["warnings"])
+
+
+def test_severe_breathlessness_requires_high_severity(kb):
+    symptom = {"symptom_id": "shortness_of_breath", "present": True,
+               "severity": 7, "duration_days": 1}
+    mild_result = check_red_flags([symptom], kb)
+    assert "severe_breathing_difficulty" not in mild_result["trace"]
+    severe_result = check_red_flags([{**symptom, "severity": 8}], kb)
+    assert "severe_breathing_difficulty" in severe_result["trace"]
 
 
 def test_red_flag_is_identical_for_extra_symptoms_age_and_sex(kb):

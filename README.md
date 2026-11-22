@@ -13,6 +13,7 @@ anonymous SQLite history, and a Streamlit interface.
 - Logistic Regression and Random Forest synthetic-data comparison
 - Anonymous session history and deletion controls
 - CSV result download and an educational-only results page
+- Optional rule-based free-text symptom entry with a required confirmation step
 
 ## Installation
 
@@ -38,6 +39,14 @@ streamlit run app.py
 ```
 
 Open the URL shown by Streamlit, normally `http://localhost:8501`.
+
+## Free-text symptom entry
+
+On the Assessment page, choose **Describe your symptoms**, enter a short
+description, and select **Understand my symptoms**. Review and edit the detected
+symptoms, then choose **Assess** to run safety checks and scoring. Matching is
+rule-based and deterministic; unusual wording or spelling may be missed, and
+unrecognized text is not scored. Always confirm the detected symptoms.
 
 ## Test
 

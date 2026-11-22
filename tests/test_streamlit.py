@@ -30,6 +30,17 @@ def test_assessment_page_loads():
     assert app.warning
 
 
+def test_free_text_flow_requires_symptom_confirmation():
+    app = AppTest.from_file(ROOT / "pages" / "1_Assessment.py")
+    app.run(timeout=10)
+    app.radio[0].set_value("Describe your symptoms").run(timeout=10)
+    app.text_area[0].input("I have a fever and cough").run(timeout=10)
+    app.button[0].click().run(timeout=10)
+    assert not app.exception
+    assert any(item.value == "Confirm detected symptoms" for item in app.subheader)
+    assert any(item.label == "Assess" for item in app.button)
+
+
 def test_results_page_loads_without_assessment():
     app = AppTest.from_file(ROOT / "pages" / "2_Results.py")
     app.run(timeout=10)

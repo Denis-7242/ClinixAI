@@ -24,6 +24,7 @@ class RedFlag(BaseModel):
     description: str
     required_symptom_ids: list[str]
     urgency: str
+    minimum_severity: int | None = Field(default=None, ge=1, le=10)
 
 
 class Disease(BaseModel):
@@ -44,6 +45,7 @@ class Symptom(BaseModel):
     id: str
     display_name: str
     question: str
+    synonyms: list[str] | None = None
 
 
 class KnowledgeBase(BaseModel):

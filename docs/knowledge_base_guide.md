@@ -10,7 +10,9 @@ diagnostic tool and is not exhaustive.
 ## Schema
 
 - `Source`: cited publisher, title, URL, and year.
-- `Symptom`: stable id, display name, and a plain-language question.
+- `Symptom`: stable id, display name, plain-language question, and optional
+  `synonyms` for everyday free-text matching. Use concise, unambiguous phrases;
+  for example, abdominal pain may include "tummy pain" and "stomach ache".
 - `SymptomWeight`: symptom id, weight from 0 to 1, and an optional specificity note.
 - `RedFlag`: combination of symptoms and an urgency message.
 - `Disease`: description, prior probability, severity, symptoms, risk factors,
@@ -23,8 +25,13 @@ The valid next-step categories are `self_care`, `see_clinician`,
 
 Add or edit entries only in `knowledge_base/knowledge_base.json`; no Python
 code change is required. Add any source under `sources`, any symptoms under
-`symptoms`, and then add the disease with valid symptom and source ids. Run
+`symptoms` (including optional `synonyms` for common alternate wording), and
+then add the disease with valid symptom and source ids. Run
 `load_knowledge_base()` and the knowledge base tests.
+
+Red flags may specify `minimum_severity` (1-10). The severe breathing rule
+requires the shortness-of-breath symptom to be marked present at severity 8 or
+higher; breathlessness alone does not trigger that rule.
 
 ## Illustrative values
 

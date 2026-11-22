@@ -16,9 +16,35 @@ from safety.disclaimers import (
     DISCLAIMER_FULL,
     DISCLAIMER_SHORT,
 )
+from safety.red_flags import check_red_flags
+from safety.validation import validate_input
+from services.text_parser import ParseResult, parse_symptom_text
 
 MATH_WEIGHT = 0.6
 ML_WEIGHT = 0.4
+
+
+def parse_free_text(text: object) -> ParseResult:
+    """Parse text and preflight it through the safety validation and red flags."""
+    kb = load_knowledge_base()
+    parsed = parse_symptom_text(text, kb)
+    validation = validate_input(
+        parsed.symptoms,
+        None,
+        None,
+        {symptom.id for symptom in kb.symptoms},
+    )
+    if validation["errors"] and not parsed.symptoms:
+        parsed.warnings.append(
+            "No recognized symptoms are ready for assessment; add or confirm symptoms."
+        )
+    red_flag_result = check_red_flags(validation["cleaned_symptoms"], kb)
+    if red_flag_result["triggered"]:
+        parsed.warnings.append(
+            "A possible urgent symptom combination was detected. Confirm the "
+            "symptoms, then submit for the full safety assessment."
+        )
+    return parsed
 
 
 def run_assessment(

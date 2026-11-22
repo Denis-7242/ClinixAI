@@ -13,26 +13,26 @@
     {"id":"who_tb","title":"Tuberculosis","publisher":"World Health Organization","url":"https://www.who.int/news-room/fact-sheets/detail/tuberculosis","year":2024}
   ],
   "symptoms": [
-    {"id":"fever","display_name":"Fever","question":"Have you been feeling feverish or measured a raised temperature?"},
-    {"id":"cough","display_name":"Cough","question":"Do you currently have a cough?"},
-    {"id":"sore_throat","display_name":"Sore throat","question":"Does your throat feel sore or painful?"},
-    {"id":"runny_nose","display_name":"Runny nose","question":"Do you have a runny or blocked nose?"},
-    {"id":"sneezing","display_name":"Sneezing","question":"Have you been sneezing frequently?"},
-    {"id":"headache","display_name":"Headache","question":"Do you currently have a headache?"},
-    {"id":"fatigue","display_name":"Fatigue","question":"Do you feel unusually tired or weak?"},
-    {"id":"body_aches","display_name":"Body aches","question":"Do you have muscle or body aches?"},
-    {"id":"shortness_of_breath","display_name":"Shortness of breath","question":"Do you have difficulty breathing or feel unusually breathless?"},
-    {"id":"chest_pain","display_name":"Chest pain","question":"Do you have chest pain or chest discomfort?"},
-    {"id":"nausea","display_name":"Nausea","question":"Do you feel nauseated or likely to vomit?"},
-    {"id":"vomiting","display_name":"Vomiting","question":"Have you been vomiting?"},
-    {"id":"diarrhea","display_name":"Diarrhea","question":"Are you passing loose or watery stools?"},
-    {"id":"abdominal_pain","display_name":"Abdominal pain","question":"Do you have pain or cramping in your abdomen?"},
-    {"id":"dysuria","display_name":"Painful urination","question":"Does it hurt or burn when you urinate?"},
-    {"id":"frequent_urination","display_name":"Frequent urination","question":"Do you need to urinate more often than usual?"},
-    {"id":"stiff_neck","display_name":"Stiff neck","question":"Is it painful or difficult to bend your neck forward?"},
-    {"id":"confusion","display_name":"Confusion","question":"Are you unusually confused or hard to wake?"},
-    {"id":"blood_in_stool_or_vomit","display_name":"Blood in stool or vomit","question":"Have you seen blood in stool or vomit?"},
-    {"id":"night_sweats","display_name":"Night sweats","question":"Are you having sweating episodes at night?"}
+    {"id":"fever","display_name":"Fever","question":"Have you been feeling feverish or measured a raised temperature?","synonyms":["high temperature","feeling hot","feverish"]},
+    {"id":"cough","display_name":"Cough","question":"Do you currently have a cough?","synonyms":["coughing"]},
+    {"id":"sore_throat","display_name":"Sore throat","question":"Does your throat feel sore or painful?","synonyms":["throat pain","painful throat"]},
+    {"id":"runny_nose","display_name":"Runny nose","question":"Do you have a runny or blocked nose?","synonyms":["blocked nose","stuffy nose","nasal congestion"]},
+    {"id":"sneezing","display_name":"Sneezing","question":"Have you been sneezing frequently?","synonyms":["sneeze"]},
+    {"id":"headache","display_name":"Headache","question":"Do you currently have a headache?","synonyms":["head pain","head hurts"]},
+    {"id":"fatigue","display_name":"Fatigue","question":"Do you feel unusually tired or weak?","synonyms":["tiredness","unusual weakness","very tired"]},
+    {"id":"body_aches","display_name":"Body aches","question":"Do you have muscle or body aches?","synonyms":["muscle aches","body pains","muscle pain"]},
+    {"id":"shortness_of_breath","display_name":"Shortness of breath","question":"Do you have difficulty breathing or feel unusually breathless?","synonyms":["breathlessness","difficulty breathing","short of breath"]},
+    {"id":"chest_pain","display_name":"Chest pain","question":"Do you have chest pain or chest discomfort?","synonyms":["chest discomfort","chest hurts"]},
+    {"id":"nausea","display_name":"Nausea","question":"Do you feel nauseated or likely to vomit?","synonyms":["feeling sick","queasy"]},
+    {"id":"vomiting","display_name":"Vomiting","question":"Have you been vomiting?","synonyms":["throwing up","vomiting","being sick"]},
+    {"id":"diarrhea","display_name":"Diarrhea","question":"Are you passing loose or watery stools?","synonyms":["loose stool","loose stools","watery stool","runs"]},
+    {"id":"abdominal_pain","display_name":"Abdominal pain","question":"Do you have pain or cramping in your abdomen?","synonyms":["tummy pain","stomach ache","stomach pain","belly pain"]},
+    {"id":"dysuria","display_name":"Painful urination","question":"Does it hurt or burn when you urinate?","synonyms":["pain when urinating","burning when urinating","painful pee"]},
+    {"id":"frequent_urination","display_name":"Frequent urination","question":"Do you need to urinate more often than usual?","synonyms":["peeing often","urinating often","frequent urination"]},
+    {"id":"stiff_neck","display_name":"Stiff neck","question":"Is it painful or difficult to bend your neck forward?","synonyms":["neck stiffness","neck is stiff"]},
+    {"id":"confusion","display_name":"Confusion","question":"Are you unusually confused or hard to wake?","synonyms":["confused","disoriented","not thinking clearly"]},
+    {"id":"blood_in_stool_or_vomit","display_name":"Blood in stool or vomit","question":"Have you seen blood in stool or vomit?","synonyms":["blood in poo","bloody stool","blood in vomit","vomiting blood"]},
+    {"id":"night_sweats","display_name":"Night sweats","question":"Are you having sweating episodes at night?","synonyms":["sweating at night","night-time sweating"]}
   ],
   "diseases": [
     {"id":"malaria","name":"Malaria","description":"A mosquito-borne infection that can cause fever and other systemic symptoms.","prior_probability":0.08,"severity":"critical","symptoms":[{"symptom_id":"fever","weight":0.95},{"symptom_id":"headache","weight":0.65},{"symptom_id":"fatigue","weight":0.75},{"symptom_id":"nausea","weight":0.55},{"symptom_id":"vomiting","weight":0.45},{"symptom_id":"body_aches","weight":0.55}],"risk_factors":["Recent travel to an area where malaria occurs","Mosquito exposure"],"next_step":"urgent_care","advice":"Seek prompt clinician or travel-health assessment, especially after travel or in a malaria-risk area.","source_ids":["who_malaria"],"illustrative":true},
@@ -51,6 +51,6 @@
     {"id":"fever_stiff_neck","description":"Fever with a stiff neck","required_symptom_ids":["fever","stiff_neck"],"urgency":"Seek emergency care now."},
     {"id":"confusion_high_fever","description":"Confusion with fever","required_symptom_ids":["confusion","fever"],"urgency":"Seek emergency care now."},
     {"id":"blood_in_stool_or_vomit","description":"Blood in stool or vomit","required_symptom_ids":["blood_in_stool_or_vomit"],"urgency":"Seek urgent medical care now."},
-    {"id":"severe_breathing_difficulty","description":"Severe or rapidly worsening breathing difficulty","required_symptom_ids":["shortness_of_breath"],"urgency":"Seek emergency care now."}
+    {"id":"severe_breathing_difficulty","description":"Severe breathing difficulty","required_symptom_ids":["shortness_of_breath"],"minimum_severity":8,"urgency":"Seek emergency care now."}
   ]
 }

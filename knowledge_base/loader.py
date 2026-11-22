@@ -61,6 +61,15 @@ def validate_knowledge_base(kb: KnowledgeBase) -> KnowledgeBase:
                 f"{', '.join(unknown_symptoms)}"
             )
 
+    for symptom in kb.symptoms:
+        if symptom.synonyms is None:
+            continue
+        normalized_synonyms = [synonym.strip().casefold() for synonym in symptom.synonyms]
+        if any(not synonym for synonym in normalized_synonyms):
+            raise ValueError(f"Symptom '{symptom.id}' has an empty synonym")
+        if len(normalized_synonyms) != len(set(normalized_synonyms)):
+            raise ValueError(f"Symptom '{symptom.id}' has duplicate synonyms")
+
     prior_total = sum(disease.prior_probability for disease in kb.diseases)
     if not 0.9 <= prior_total <= 1.1:
         logger.warning(

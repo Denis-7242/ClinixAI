@@ -1,3 +1,4 @@
+import json
 import math
 
 from expert_system.inference_engine import expert_scores, suggest_next_questions
@@ -79,3 +80,40 @@ def test_next_questions_are_unanswered_and_deterministic():
     assert first == second
     assert len(first) == 3
     assert "fever" not in first
+
+
+def test_explanation_trace_is_complete_and_json_serializable():
+    kb = load_knowledge_base()
+    answers = [
+        {"symptom_id": "fever", "present": True},
+        {"symptom_id": "cough", "present": False},
+    ]
+    explanation = expert_scores(answers, kb)["influenza"]["explanation"]
+
+    assert "symptoms_matched" in explanation
+    assert "symptoms_contradicted" in explanation
+    assert "weights_used" in explanation
+    assert "top_contributing_symptoms" in explanation
+    assert "fever" in explanation["symptoms_matched"]
+    assert "cough" in explanation["symptoms_contradicted"]
+    assert explanation["weights_used"]["fever"] == 0.75
+    json.dumps(explanation)
+
+
+def test_math_contributions_for_present_and_absent_symptoms():
+    kb = load_knowledge_base()
+    present = naive_bayes_posteriors(
+        [{"symptom_id": "fever", "present": True}],
+        kb,
+    )
+    absent = naive_bayes_posteriors(
+        [{"symptom_id": "fever", "present": False}],
+        kb,
+    )
+
+    present_contributions = present["influenza"]["contributions"]
+    absent_contributions = absent["influenza"]["contributions"]
+    assert "fever" in present_contributions
+    assert "fever" in absent_contributions
+    assert present_contributions["fever"]["log_likelihood_ratio"] > 0
+    assert absent_contributions["fever"]["log_likelihood_ratio"] < 0

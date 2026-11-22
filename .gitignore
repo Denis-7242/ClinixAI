@@ -18,3 +18,10 @@ models/*.joblib
 # OS files
 .DS_Store
 Thumbs.db
+# Ignore all Markdown files except README.md
+*.md
+!README.md
+!docs/*.md
+
+# Local database
+data/*.db

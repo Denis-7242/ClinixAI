@@ -1,0 +1,1 @@
+{"version":"broken","symptoms":[],"diseases":[{"id":"broken","name":"Broken","description":"Broken fixture","prior_probability":1.0,"severity":"low","symptoms":[],"risk_factors":[],"next_step":"self_care","advice":"Seek appropriate care.","source_ids":["unknown"],"illustrative":false}],"red_flags":[],"sources":[]}
